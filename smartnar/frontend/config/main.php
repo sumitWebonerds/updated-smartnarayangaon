@@ -11,7 +11,18 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+     'modules' => [
+          'api' => [
+            'class' => 'frontend\modules\api\module',
+        ],
+         'apiservice' => [
+            'class' => 'frontend\modules\apiservice\module',
+        ],
+     ],
     'components' => [
+          'SmsResponse' =>[
+            'class' => 'frontend\components\SmsResponse',
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],

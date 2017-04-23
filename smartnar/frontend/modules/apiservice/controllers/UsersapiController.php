@@ -1,5 +1,5 @@
 <?php
-namespace frontend\modules\api\controllers;
+namespace frontend\modules\apiservice\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -57,6 +57,7 @@ class UsersapiController extends ActiveController
                 $model->contact= $data->mobile;
                 $model->username = $data->name;
                 $model->email = (isset($data->email))?$data->email:"";
+                
                 $mob = $data->mobile;
                 $user = User::find()->where([
                 'contact' => $model->contact
@@ -66,22 +67,26 @@ class UsersapiController extends ActiveController
                     $user = User::find()->where(['contact' => $model->contact])->one();
                     
                     $otp = rand(5000,10000); 
-                    
-                    $stat=Yii::$app->db->createCommand("UPDATE user SET otp=:otp WHERE id=:id")->bindValue(':otp',$otp)->bindValue(':id', $user->id)->execute();
-                    
-                    if($stat){
+                    $user->otp = $otp; 
+                    $user->updated_at = time(); 
 
-                        //$verify = Yii::$app->SmsResponse->getResponse($mob,$random); 
-                        
+                   // $stat=Yii::$app->db->createCommand("UPDATE user SET otp=:otp WHERE id=:id")->bindValue(':otp',$otp)->bindValue(':id', $user->id)->execute();
+                    
+                    if($user->save(false)){
+
+                        if (extension_loaded('curl')) {
+                            $verify = Yii::$app->SmsResponse->getResponse($mob,$otp); 
+                        }
                         if(!empty($user->email)){
                         
-                          //  $model->sendEmail(Yii::$app->params['adminEmail'],$otp);
+                            $model->sendEmail(Yii::$app->params['adminEmail'],$otp);
                         
                         }                           
 
                         $response['status']='exist';
                         
                         $response['message']='You Have Already Registered click Ok to get New OTP';
+                        $user->otp = "" ; 
                         $response['data']=$user;
                         
                         return $response;
@@ -92,25 +97,27 @@ class UsersapiController extends ActiveController
                     }
                     
                 }else{
-                                
-                 
+
+                $random = rand(5000,10000);                                 
+                  $model->auth_key = $random;
+                  $model->password_hash = $random;
+                  $model->otp = $random;
+                  $model->created_at = time(); 
+                  $model->updated_at = time();               
                     if($model->save(false)){
 
-                         $random = rand(5000,10000); 
                         // //Sms intrigration goes here
                        // //Send SMS and save otp into same object
-                        $model->otp = $random;
                         
                         
-                        $model->save(false);
-                        {
-                             //$verify = Yii::$app->SmsResponse->getResponse($mob,$random); 
-                             
+                        if (extension_loaded('curl')) {
+                             $verify = Yii::$app->SmsResponse->getResponse($mob,$random); 
+                        }
                              if(!empty($model->email)){
-                            //     $model->sendEmail(Yii::$app->params['adminEmail'],$model->otp);
+                                 $model->sendEmail(Yii::$app->params['adminEmail'],$model->otp);
                              }                           
                              $response['otp']="OTP sent";
-                        }                    
+                                            
                              $response["message"]="Please Check Your Mobile or Email";
                              $response["data"] = $model;          
                              $response["status"] = "success";   
@@ -160,6 +167,7 @@ class UsersapiController extends ActiveController
         $model = new Users();
 
          $data =  json_decode(utf8_encode(file_get_contents("php://input")), false);
+         
          if(empty($data)){
                 
                  // $mobile = 8899007766;

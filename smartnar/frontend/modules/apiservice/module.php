@@ -1,16 +1,16 @@
 <?php
 
-namespace frontend\modules\api;
+namespace frontend\modules\apiservice;
 
 /**
- * api module definition class
+ * apiservice module definition class
  */
-class Module extends \yii\base\Module
+class module extends \yii\base\Module
 {
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'frontend\modules\api\controllers';
+    public $controllerNamespace = 'frontend\modules\apiservice\controllers';
 
     /**
      * @inheritdoc

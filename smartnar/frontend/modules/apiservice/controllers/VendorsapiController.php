@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\api\controllers;
+namespace frontend\modules\apiservice\controllers;
 
 use Yii;
 use yii\web\Controller;
@@ -67,7 +67,7 @@ class VendorsapiController extends ActiveController
     public function actionShopDetails()
     {
 
-      //  $id =Yii::$app->request->get('id'); 
+        $id =Yii::$app->request->get('id'); 
         $model = new Vendor();
         $new = new Ratings();
         $shop = '';

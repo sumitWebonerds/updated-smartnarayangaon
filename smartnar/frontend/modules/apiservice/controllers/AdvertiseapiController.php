@@ -1,22 +1,21 @@
 <?php
-namespace frontend\modules\api\controllers;
+namespace frontend\modules\apiservice\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\rest\ActiveController;
 use yii\web\Response;
-use common\models\CategoriesSearch; 
-use common\models\Categories; 
-use common\models\Sliders;
+use common\models\AdvertisementsSearch; 
+use common\models\Advertisements; 
 use yii\db\Expression;
 
 /**
  * Site controller
  */
-class CategoriesapiController extends ActiveController
+class AdvertiseapiController extends ActiveController
 {
-    public $modelClass = "common\models\Categories";
+    public $modelClass = "common\models\Advertisements";
 
 
 public function behaviors()
@@ -42,31 +41,24 @@ public function behaviors()
 
    public function actionList()
     {
-        $parent_id =Yii::$app->request->get('parent_id'); 
-        $model = new Categories();
-      	if(!empty($parent_id))
-    	{ 
-	    	return $model->find()->where(['parent_id'=>$parent_id,'app_id'=>1])->asArray()->all();	
-    	}
-    	else{
-	    	return $model->find()->where(['OR',
-                                               ['IS', 'parent_id', (new Expression('Null'))],
-                                               ['parent_id' =>0]])->asArray()->all();	
-    	}	    
-     }
 
-    public function actionSlider()
-    {
-        $parent_id =Yii::$app->request->get('parent_id'); 
-        $model = new Sliders();
+        //$city =Yii::$app->request->get('city');
+        //$status =Yii::$app->request->get('status'); 
+    	$parent_id =Yii::$app->request->get('parent_id'); 
+    
+        $model = new Advertisements();
+    
         if(!empty($parent_id))
         { 
             return $model->find()->where(['app_id'=>1])->asArray()->all();  
         }
         else{
+    
             return $model->find()->where(['app_id'=>1])->asArray()->all();   
-        }       
-     }
+        } 	    
+    }
 
 
 }
+
+
