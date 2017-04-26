@@ -41,25 +41,32 @@ public function behaviors()
 
     public function actionList()
     {        
+    	$model = new Buses();  
+        $name =Yii::$app->request->get('name'); 
+    	
+        $buses=$model->find()->select('destination')->distinct()->where(['source'=>$name, 'status'=>1,'app_id'=>1])->asArray()->all();
+        return $buses;
+
+    }
+
+
+    public function actionSourcelist()
+    {        
     	$model = new Buses();      	
-        $buses=$model->find()->select('destination')->distinct()->where(['status'=>1,'app_id'=>1])->asArray()->all();
+        $buses=$model->find()->select('source')->distinct()->where(['status'=>1,'app_id'=>1])->asArray()->all();
         return $buses;
 
     }
     public function actionDetail()
     {
     	$model = new Buses(); 
-    	$destination =Yii::$app->request->get('name'); 
-    	$detail = 'Pune';
-    	if(!empty($destination))
-    	{
-    	    $buses=$model->find()->where(['destination'=>$destination,'status'=>1,'app_id'=>1])->asArray()->all();
-    	    return $buses;
-    	}else{
+    	$source =Yii::$app->request->get('source'); 
+        $destination =Yii::$app->request->get('destination'); 
 
-    		 $buses=$model->find()->where(['destination'=>$detail,'status'=>1,'app_id'=>1])->asArray()->all();
-    	    return $buses;
-    	}
+    	
+        $buses=$model->find()->where(['source'=>$source, 'destination'=>$destination,'status'=>1,'app_id'=>1])->asArray()->all();
+        return $buses;
+    	
     }
 
     public function actionArrivalbus()

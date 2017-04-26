@@ -2,7 +2,7 @@
 namespace frontend\modules\api\controllers;
 
 use Yii;
-use yii\base\InvalidParamException;
+use yii\base\InvalidParamException;categoriesapi
 use yii\web\BadRequestHttpException;
 use yii\rest\ActiveController;
 use yii\web\Response;
