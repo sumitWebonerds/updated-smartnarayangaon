@@ -49,6 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'map_location',
             'collected_by',
             'webingeer_coupon',
+            'latitude',
+            'lognitude',
             'status',
         ],
     ]) ?>

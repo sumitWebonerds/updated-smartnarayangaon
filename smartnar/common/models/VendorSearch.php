@@ -19,8 +19,8 @@ class VendorSearch extends Vendor
     {
         return [
             [['id', 'app_id', 'category_id', 'subcategory_id', 'mobile', 'opt_mobileno', 'status'], 'integer'],
-            [['date', 'shop_name', 'shop_address', 'shop_image', 'time_from', 'time_to', 'weekly_off', 'shop_owner', 'description', 'email', 'opt_email', 'website', 'collected_by', 'webingeer_coupon'], 'safe'],
-            [['map_location'], 'number'],
+            [['date', 'shop_name', 'shop_address', 'shop_image', 'time_from', 'time_to', 'weekly_off', 'shop_owner', 'description', 'email', 'opt_email', 'website', 'collected_by', 'webingeer_coupon','lognitude','latitude'], 'safe'],
+            [['map_location','lognitude','latitude'], 'number'],
         ];
     }
 

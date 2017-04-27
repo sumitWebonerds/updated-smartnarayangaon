@@ -15,7 +15,7 @@ use common\models\App;
 $model=new App();
 
 
-$data = $model->find()->where(['city'=>'Narayangaon'])->one();
+$data = $model->find()->where(['city'=>'ambegaon-taluka'])->one();
 
 AppAsset::register($this);
 ?>
@@ -40,7 +40,7 @@ AppAsset::register($this);
         <span class="icon-bar"></span>
       </button>
 	  <span class="logo">
-	      <a class="navbar-brand" href="<?php echo Url::toRoute('site/index'); ?>"><span>Smart</span>Narayangaon</a>
+	      <a class="navbar-brand" href="<?php echo Url::toRoute('site/index'); ?>"><span>Smart</span>Ambegaon Taluk</a>
 	  </span>
 	</div>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -65,7 +65,7 @@ AppAsset::register($this);
           <p>This application is very much useful in daily life.It gives Bus time-
 table,emergency numbers ,contact information of each and every enterprise,Special Offers local
 commercial establishments, Home Services, all types of shops, Enterprises, Pvt Ltd companies ,
-Tourism Attractions, and a whole lot of more information about the Narayangaon</p>
+Tourism Attractions, and a whole lot of more information about the Ambegaon Taluk</p>
 		  <a href="https://goo.gl/NvphMX">Click Here to Download</a>
         </div>
         <div class="modal-footer">
@@ -123,7 +123,7 @@ Tourism Attractions, and a whole lot of more information about the Narayangaon</
 			<div class="footer-bottom text-center">
 			<div class="container">
 				<div class="footer-logo">
-					<a href="<?php echo Url::toRoute('site/index'); ?>"><span>Smart</span>Narayagaon</a>
+					<a href="<?php echo Url::toRoute('site/index'); ?>"><span>Smart</span>Ambegaon Taluka</a>
 				</div>
 				<div class="footer-social-icons">
 					<ul>
@@ -134,7 +134,7 @@ Tourism Attractions, and a whole lot of more information about the Narayangaon</
 					</ul>
 				</div>
 				<div class="copyrights">
-					<p> &copy; <?= date('Y') ?> Smart Narayangaon. All Rights Reserved | Design by  <a href="http://webonerds.com/"> Webonerds</a></p>
+					<p> &copy; <?= date('Y') ?> Smart Ambegaon Taluk. All Rights Reserved | Design by  <a href="http://webonerds.com/"> Webonerds</a></p>
 				</div>
 				<div class="clearfix"></div>
 			</div>

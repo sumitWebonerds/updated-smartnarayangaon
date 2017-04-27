@@ -30,6 +30,8 @@ use Yii;
  * @property string $webingeer_coupon
  * @property integer $status
  * @property integer $ratings
+ * @property double $latitude
+ * @property double $lognitude
  */
 class Vendor extends \yii\db\ActiveRecord
 {
@@ -38,7 +40,7 @@ class Vendor extends \yii\db\ActiveRecord
      */
     public $file;
     public $ratings;
-    
+
     public static function tableName()
     {
         return 'vendor';
@@ -53,8 +55,8 @@ class Vendor extends \yii\db\ActiveRecord
             [['shop_name', 'shop_address', 'shop_owner', 'description', 'mobile'], 'required'],
             [['app_id','mobile', 'opt_mobileno', 'status','ratings'], 'integer'],
             [['file'],'file'],
-            [['date', 'time_from', 'time_to','ratings'], 'safe'],
-            [['map_location'], 'number'],
+            [['date', 'time_from', 'time_to','ratings','latitude','lognitude'], 'safe'],
+            [['map_location','latitude','lognitude'], 'number'],
             [['webingeer_coupon'], 'string'],
             [['shop_name', 'shop_address',  'weekly_off', 'shop_owner', 'description', 'email', 'opt_email', 'website', 'collected_by'], 'string', 'max' => 255],
         ];
@@ -88,7 +90,9 @@ class Vendor extends \yii\db\ActiveRecord
             'collected_by' => 'Collected By',
             'webingeer_coupon' => 'Webingeer Coupon',
             'status' => 'Status',
-            'ratings'=>"Ratings"
+            'ratings'=>"Ratings",
+            'latitude'=>"Latitude",
+            'lognitude'=>"Logitude"
         ];
     }
 

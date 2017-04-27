@@ -57,7 +57,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'time_to')->textInput() ?>
 
-    <?= $form->field($model, 'weekly_off')->dropdownList(['Sunday' => 'Sunday', 'Monday' => 'Monday','Tuesday' => 'Tuesday','Wedensday' => 'Wedensday','Thursday' => 'Thursday','Friday' => 'Friday','Saturday' => 'Saturday'], ['prompt' => '---Select Data---']) ?>
+    <?= $form->field($model, 'weekly_off')->dropdownList(['Sunday' => 'Sunday', 'Monday' => 'Monday','Tuesday' => 'Tuesday','Wedensday' => 'Wedensday','Thursday' => 'Thursday','Friday' => 'Friday','Saturday' => 'Saturday']) ?>
 
     <?= $form->field($model, 'shop_owner')->textInput(['maxlength' => true]) ?>
 
@@ -76,13 +76,15 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'map_location')->textInput() ?>
+    <?= $form->field($model, 'latitude')->textInput() ?>
+
+    <?= $form->field($model, 'lognitude')->textInput() ?>
 
     <?= $form->field($model, 'collected_by')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'webingeer_coupon')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ], ['prompt' => '---Select Data---']) ?>
+    <?= $form->field($model, 'webingeer_coupon')->dropDownList([ 'Yes' => 'Yes', 'No' => 'No', ]) ?>
 
-     <?= $form->field($model, 'status')->dropDownList([ 1 => 'Active', 0 => 'In Active', ], ['prompt' => '---Select Data---']) ?>
+     <?= $form->field($model, 'status')->dropDownList([ 1 => 'Active', 0 => 'In Active', ]) ?>
 
     <div class="form-group text-right">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success ' : 'btn btn-primary']) ?>

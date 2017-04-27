@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'logo_image')->fileInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'city')->textInput(['maxlength' => true,'readonly'=>true]) ?>
 
     <?= $form->field($model, 'about_us')->textarea(['rows' => 6]) ?>
 

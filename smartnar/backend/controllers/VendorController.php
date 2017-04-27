@@ -99,8 +99,8 @@ class VendorController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
-            $subcategories = Yii::$app->request->post('Vendor')['subcategory_id']; 
-            $app_id = Yii::$app->request->post('Vendor')['app_id'];
+            $subcategories = Yii::$app->request->post('Vendor')['subcategory_id'];             
+            $app_id = Yii::$app->request->postmodel('Vendor')['app_id'];
             
             foreach($subcategories as $category)
             {   
@@ -149,6 +149,8 @@ class VendorController extends Controller
         $model = $this->findModel($id);
         $vendorCategory = new VendorCategories();
         if ($model->load(Yii::$app->request->post())) {
+            $model->lognitude =  Yii::$app->request->post('Vendor')['lognitude']; 
+            $model->latitude =  Yii::$app->request->post('Vendor')['latitude']; 
             
             $subcat=  $vendorCategory->load(Yii::$app->request->post('Vendor')['subcategory_id']); 
             $id = $vendorCategory->load(Yii::$app->request->post('Vendor')['app_id']);
@@ -168,7 +170,8 @@ class VendorController extends Controller
             $imageName = "vendor_image_".rand();
 
             $model->file = UploadedFile::getInstance($model,'shop_image');
-
+            
+            
             if(!empty($model->file)){
 
                 $model->file->saveAs('../images/vendors/'.$imageName.'.'.$model->file->extension);
