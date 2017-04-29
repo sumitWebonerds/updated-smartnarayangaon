@@ -24,7 +24,7 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
     'dateFormat'=>'yyyy-MM-dd',
     //'language' => 'ru',
-    //'dateFormat' => 'yyyy-MM-dd',
+    'dateFormat' => 'yyyy-MM-dd',
     'options'=>['class'=>'form-control']
 ]) ?>
 

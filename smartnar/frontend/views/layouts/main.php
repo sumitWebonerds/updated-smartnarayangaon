@@ -31,6 +31,15 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+<?php $this->beginBody() ?>
+
+<?php if(empty($data))
+{?>
+	<h2> Application not available  </2>
+
+<?php
+}
+?>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
