@@ -69,12 +69,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner" role="listbox">
       <?php
-
-       foreach($sliders as $slider){ 
         $i=0;
-        
+       foreach($sliders as $slider){ 
+                
        ?>
-          <div class="item">
+          <div class="item <?php echo ($i==0)?'active':'';?>">
               <img src="/images/<?= $slider['name'] ?>" alt="slider_image" >            
           </div>
        <?php
