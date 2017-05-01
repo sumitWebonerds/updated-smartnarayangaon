@@ -54,6 +54,7 @@ class Vendor extends \yii\db\ActiveRecord
         return [
             [['shop_name', 'shop_address', 'shop_owner', 'description', 'mobile'], 'required'],
             [['app_id','mobile', 'opt_mobileno', 'status','ratings'], 'integer'],
+            [['shop_image'],'required','on'=>'needimage'],
             [['file'],'file'],
             [['date', 'time_from', 'time_to','ratings','latitude','lognitude'], 'safe'],
             [['map_location','latitude','lognitude'], 'number'],
@@ -119,6 +120,10 @@ class Vendor extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasMany(VendorCategories::className(), ['vendor_id' => 'id']);
+    }
+     public function getImages()
+    {
+        return $this->hasMany(Images::className(), ['vendor_id' => 'id']);
     }
     public function getApp()
     {   

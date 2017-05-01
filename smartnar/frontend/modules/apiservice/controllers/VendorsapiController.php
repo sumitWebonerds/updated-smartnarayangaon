@@ -87,7 +87,8 @@ class VendorsapiController extends ActiveController
         $shop = '';
         if(!empty($id))
         { 
-            $shop = $model->find()->where(['id'=>$id,'app_id'=>1])->asArray()->one();
+            $shop = $model->find()->with('images')->where(['id'=>$id,'app_id'=>1])->asArray()->one();
+            
             $shop['ratings'] = $model->ratingsAvg($id);    
            // $shop['category'] = $model->categoryDetails($id); 
             return $shop; 

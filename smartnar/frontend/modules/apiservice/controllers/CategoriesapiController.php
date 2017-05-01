@@ -40,6 +40,15 @@ public function behaviors()
 }
 
 
+   public function actionSearchByName()
+    {
+        $parent_id =Yii::$app->request->get('str'); 
+        $model = new Categories();
+   
+	    	return $model->find()->where(['category_name'=>$parent_id,'app_id'=>1])->asArray()->all();	
+
+     }
+
    public function actionList()
     {
         $parent_id =Yii::$app->request->get('parent_id'); 

@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use yii\helpers\Url;
+use common\widgets\Alert;
 /* @var $this yii\web\View */
 /* @var $model common\models\Vendor */
 
@@ -11,8 +12,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Vendors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vendor-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -25,10 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+<div class="row">
+
+     <div class="col-md-6">
+   <?= DetailView::widget([
         'model' => $model,
-        'attributes' => [
-            'id',
+        'attributes' => [            
             'app_id',
             'date',
             'shop_name',
@@ -49,10 +50,68 @@ $this->params['breadcrumbs'][] = $this->title;
             'map_location',
             'collected_by',
             'webingeer_coupon',
-            'latitude',
-            'lognitude',
             'status',
         ],
     ]) ?>
+
+
+     </div> 
+
+     <div class="col-md-6">
+
+<?php
+      $sliders = $model->images;
+  if(count($sliders)> 0)
+    {
+        ?>
+<section>
+    <div class="">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner" role="listbox">
+      <?php
+
+       foreach($sliders as $slider){ 
+        $i=0;
+        
+       ?>
+          <div class="item">
+              <img src="/images/sliders/<?= $slider['name'] ?>" alt="slider_image" >            
+          </div>
+       <?php
+    
+       $i++; 
+      }?>
+  </div> 
+  <ol class="carousel-indicators">
+    <?php  
+   
+    for ($j=0; $j <= $i; $j++) { 
+    ?>
+        <li data-target="#carousel-example-generic" data-slide-to="<?= $j?>" ></li>
+    <?php }
+    
+    ?>
+  </ol>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+  </a>
+</section> 
+<?php } ?>
+
+
+
+        <?= Alert::widget() ?>
+     <?php  echo $this->render('_image_upload', ['model' => $model]); ?>
+     </div>
+
+</div>
+
+ 
 
 </div>

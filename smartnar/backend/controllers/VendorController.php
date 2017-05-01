@@ -12,6 +12,7 @@ use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use common\models\Categories;
 use common\models\VendorCategories;
+use common\models\Images; 
 /**
  * VendorController implements the CRUD actions for Vendor model.
  */
@@ -25,10 +26,10 @@ class VendorController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index','create','view','update','delete','logout'],
+                'only' => ['index','create','view','update','delete','logout','addimage'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','delete','logout'],
+                        'actions' => ['index','create','view','update','delete','logout','addimage'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -37,7 +38,9 @@ class VendorController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'addimage'=>['post','GET'],
                     'logout' => ['post'],
+                    'create' => ['post','GET'],
                     'delete' => ['POST'],
                 ],
             ],
@@ -88,6 +91,54 @@ class VendorController extends Controller
         ]);
     }
 
+ public function actionAddimage($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = "needimage"; 
+        $image = new Images(); 
+        $model->shop_image  = null; 
+
+        if ($model->load(Yii::$app->request->post()))
+        {   
+                $imageName = "vendor_image_".rand();            
+                $model->file = UploadedFile::getInstance($model,'shop_image');
+                if(!empty($model->file))
+                {                                  
+                        $model->file->saveAs('../images/vendors/'.$imageName.'.'.$model->file->extension);                
+                        $image->name = 'vendors/'.$imageName.'.'.$model->file->extension;
+                        $image->vendor_id = $model->id; 
+                        $image->created_on = date("Y-m-d h:i:s"); 
+                        $image->is_active = 1; 
+                        $model->shop_name = $image->name;
+                        if($image->save())
+                        {
+                            Yii::$app->session->setFlash('success', 'Image Added successfully.');
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        }
+                        else
+                        {
+                            Yii::$app->session->setFlash('error', 'Please Select valid Image File.');
+                            return $this->redirect(['view','id' => $model->id]);
+                        }
+                }
+                else
+                {              
+                            Yii::$app->session->setFlash('error', 'Please Select valid Image File.');
+                    
+                    return $this->redirect(['view','id' => $model->id]);
+                }
+           
+        }
+        else
+        {
+                            Yii::$app->session->setFlash('error', 'Please Select Image.');
+
+            return $this->render('view',['model' => $model]);
+        }
+    }
+
+
+
     /**
      * Creates a new Vendor model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -100,7 +151,7 @@ class VendorController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
             $subcategories = Yii::$app->request->post('Vendor')['subcategory_id'];             
-            $app_id = Yii::$app->request->postmodel('Vendor')['app_id'];
+            $app_id = Yii::$app->request->post('Vendor')['app_id'];
             
             foreach($subcategories as $category)
             {   
@@ -147,6 +198,7 @@ class VendorController extends Controller
 
 
         $model = $this->findModel($id);
+        
         $vendorCategory = new VendorCategories();
         if ($model->load(Yii::$app->request->post())) {
             $model->lognitude =  Yii::$app->request->post('Vendor')['lognitude']; 

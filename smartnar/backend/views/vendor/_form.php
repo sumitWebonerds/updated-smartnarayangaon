@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
 
 <div class="vendor-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'action' => ['addimage']]]); ?>
 
 
 <div class="row">
