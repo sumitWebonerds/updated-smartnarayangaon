@@ -87,7 +87,7 @@ class VendorsapiController extends ActiveController
         $shop = '';
         if(!empty($id))
         { 
-            $shop = $model->find()->with('images')->where(['id'=>$id,'app_id'=>1])->asArray()->one();
+            $shop = $model->find()->with('images')->where(['id'=>$id])->asArray()->one();
             
             $shop['ratings'] = $model->ratingsAvg($id);    
            // $shop['category'] = $model->categoryDetails($id); 
@@ -141,14 +141,10 @@ class VendorsapiController extends ActiveController
                
             if(empty($data)){
                 
-
-
             }else{
                 $model->date=date('Y-m-d');
                 $model->shop_name=$data->shopname;
                 $model->shop_address=$data->shopaddress;
-                
-
                 $model->time_from=(isset($data->from))?date("g:i a", strtotime($data->from)):"";
                 $model->time_to=(isset($data->to))?date("g:i a", strtotime($data->to)):"";
                 $model->weekly_off= (isset($data->weeklyoff))?$data->weeklyoff:"";
@@ -157,24 +153,14 @@ class VendorsapiController extends ActiveController
                 $model->mobile=$data->contactno;
                 $model->opt_mobileno=(isset($data->optcontact))?$data->optcontact:"";
                 $model->opt_email= (isset($data->email))?$data->email:"";
+                $model->email= (isset($data->email))?$data->email:"";
                 $model->collected_by="Self Registered";
                 $model->webingeer_coupon = 'No';
             
                 if($model->save()){
-            
-                    $response["message"]="Thank You for Register We will Contact you very soon";
-                    $response["data"] = $model;          
-                    $response["status"] = "success";          
-                    
-                    return $response;
-            
-                }else{
-            
-                    $response['message']="Error";
-                    $response["status"] = "error";
-                    $response["data"] =  $model->errors;  
-                    return $response;
-            
+                   return $model;        
+                }else{            
+                    return $model->errors;            
                 }
             }
      }

@@ -44,9 +44,8 @@ public function behaviors()
     {
         $parent_id =Yii::$app->request->get('str'); 
         $model = new Categories();
-   
-	    	return $model->find()->where(['category_name'=>$parent_id,'app_id'=>1])->asArray()->all();	
-
+        return $model->find()->where(['LIKE', 'category_name', "$parent_id"])
+        ->andWhere(['app_id'=>1])->asArray()->all();	
      }
 
    public function actionList()
