@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
         
        ?>
           <div class="item">
-              <img src="/images/sliders/<?= $slider['name'] ?>" alt="slider_image" >            
+              <img src="/images/<?= $slider['name'] ?>" alt="slider_image" >            
           </div>
        <?php
     
