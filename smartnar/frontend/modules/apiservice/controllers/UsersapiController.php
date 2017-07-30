@@ -191,11 +191,9 @@ class UsersapiController extends ActiveController
 
                     $response["message"]="Welcome";
                     $response["data"] = $verify;          
-                    $response["status"] = "success";          
-                    
+                    $response["status"] = "success";                              
                     return $response;
-    
-                
+                    
                  }
                 
 

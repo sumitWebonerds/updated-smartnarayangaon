@@ -53,7 +53,7 @@ class VendorsapiController extends ActiveController
         return $behaviors;
     }
 
-
+    // 
    public function actionList()
     {
 
@@ -63,15 +63,13 @@ class VendorsapiController extends ActiveController
         $vendorCategory=new VendorCategories();
         if(!empty($subcategory_id))
         { 
-            $data = Vendor::find()->joinWith('user')->where(['vendor_categories.category_id'=>$subcategory_id,'vendor.status'=>1])->all();
-            
+            $data = Vendor::find()->with('images')->joinWith('user')->where(['vendor_categories.category_id'=>$subcategory_id,'vendor.status'=>1])->all();            
             return $data;
 
         }else{
             
-            $subcategory_id=16;
-            
-            $data = Vendor::find()->joinWith('user')->where(['vendor_categories.category_id'=>$subcategory_id,'vendor.status'=>1])->all();
+            $subcategory_id=16;            
+            $data = Vendor::find()->with('images')->joinWith('user')->where(['vendor_categories.category_id'=>$subcategory_id,'vendor.status'=>1])->all();
     
             return $data;
 

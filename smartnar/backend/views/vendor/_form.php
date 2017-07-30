@@ -57,11 +57,11 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'time_to')->textInput() ?>
 
-    <?= $form->field($model, 'weekly_off')->dropdownList(['Sunday' => 'Sunday', 'Monday' => 'Monday','Tuesday' => 'Tuesday','Wedensday' => 'Wedensday','Thursday' => 'Thursday','Friday' => 'Friday','Saturday' => 'Saturday']) ?>
+    <?= $form->field($model, 'weekly_off')->dropdownList(['Never'=>'Never', 'Sunday' => 'Sunday', 'Monday' => 'Monday','Tuesday' => 'Tuesday','Wedensday' => 'Wedensday','Thursday' => 'Thursday','Friday' => 'Friday','Saturday' => 'Saturday']) ?>
 
     <?= $form->field($model, 'shop_owner')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textArea(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textArea() ?>
 
     <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
 </div>
